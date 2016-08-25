@@ -1,0 +1,25 @@
+{
+  "name": "@vdeturckheim/stackall",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vdeturckheim/stackall.git"
+  },
+  "author": "vdeturckheim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vdeturckheim/stackall/issues"
+  },
+  "homepage": "https://github.com/vdeturckheim/stackall#readme",
+  "dependencies": {
+    "acorn-jsx": "^3.0.1",
+    "compile-hook": "^1.0.0",
+    "falafel": "^1.2.0",
+    "stacktrace-parser": "^0.1.4"
+  }
+}
