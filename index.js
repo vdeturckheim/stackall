@@ -9,7 +9,7 @@ let fileName = 'stackAll';
 
 const getKey = function (line) {
 
-    return line.file + ':' + line.methodName + '(' + line.lineNumber + ':' + line.column + ')';
+    return line.file + ':' + line.methodName;
 };
 
 const total = {};
@@ -24,16 +24,16 @@ const preExitHandler = function () {
 process.on('beforeExit', preExitHandler);
 process.on('SIGINT', preExitHandler);
 
-const record = function (key, stack) {
+const record = function (key, stack, noLine) {
 
     total[key] = total[key] || {};
     total[key].call = total[key].call + 1 || 1;
 
     if (stack.length > 0) {
-        const caller = getKey(stack.shift());
+        const caller = getKey(stack.shift(), noLine);
         total[key][caller] = total[key][caller] + 1 || 1;
 
-        record(caller, stack);
+        record(caller, stack, true);
     }
 };
 
@@ -52,7 +52,7 @@ const hijack = function (script) {
         if ( node.type === 'FunctionExpression' || node.type === 'FunctionDeclaration') {
             const src = node.body.source().trim().slice(0, -1).slice(1);
 
-            node.body.update(`{ process.__traceur((new Error()).stack)\n ${src} }`)
+            node.body.update(`{ process.__traceur((new Error()).stack)\n ${src} }`);
         }
     });
 };
