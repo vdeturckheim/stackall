@@ -51,7 +51,7 @@ const hijack = function (script) {
         if ( node.type === 'FunctionExpression' || node.type === 'FunctionDeclaration') {
             const src = node.body.source().trim().slice(0, -1).slice(1);
 
-            node.body.update(`{ process.__traceur((new Error()).stack)\n ${src} }`);
+            node.body.update(`{try{ process.__traceur((new Error()).stack)}catch(err){}\n ${src} }`);
         }
     });
 };
