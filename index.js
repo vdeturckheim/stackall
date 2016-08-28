@@ -27,7 +27,6 @@ process.on('SIGINT', preExitHandler);
 const record = function (key, stack, noLine) {
 
     total[key] = total[key] || {};
-    total[key].call = total[key].call + 1 || 1;
 
     if (stack.length > 0) {
         const caller = getKey(stack.shift(), noLine);
